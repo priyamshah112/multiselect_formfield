@@ -54,8 +54,20 @@ class _MyHomePageState extends State<MyHomePage> {
               Container(
                 padding: EdgeInsets.all(16),
                 child: MultiSelectFormField(
+                  titleText: "My Hobbies",
+                  titleStyle: TextStyle(
+                    color: Colors.black
+                  ),
+                  backgroundColor: Color(0xffffaf4ff),
+                  icon: Icon(
+                    Icons.add,
+                    color: Color(0xFF03A9F4),
+                  ),
+                  selectedOptionsColorStyle: Colors.blue,
+                  selectedOptionsTextStyle: TextStyle(
+                    color: Colors.white
+                  ),
                   autovalidate: false,
-                  titleText: 'My workouts',
                   validator: (value) {
                     if (value == null || value.length == 0) {
                       return 'Please select one or more options';
@@ -98,6 +110,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   cancelButtonLabel: 'CANCEL',
                   // required: true,
                   hintText: 'Please choose one or more',
+                  hintStyle: TextStyle(
+                    color: Colors.blue
+                  ),
                   initialValue: _myActivities,
                   onSaved: (value) {
                     if (value == null) return;

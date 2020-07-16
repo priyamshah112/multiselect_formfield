@@ -5,6 +5,9 @@ import 'package:multiselect_formfield/multiselect_dialog.dart';
 
 class MultiSelectFormField extends FormField<dynamic> {
   final String titleText;
+  final TextStyle titleStyle;
+  final TextStyle selectedOptionsTextStyle;
+  final Color selectedOptionsColorStyle;
   final String hintText;
   final bool required;
   final String errorText;
@@ -20,6 +23,9 @@ class MultiSelectFormField extends FormField<dynamic> {
   final String cancelButtonLabel;
   final Color fillColor;
   final InputBorder border;
+  final Color backgroundColor;
+  final Icon icon;
+  final TextStyle hintStyle;
 
   MultiSelectFormField(
       {FormFieldSetter<dynamic> onSaved,
@@ -27,7 +33,11 @@ class MultiSelectFormField extends FormField<dynamic> {
       dynamic initialValue,
       bool autovalidate = false,
       this.titleText = 'Title',
+      this.titleStyle = const TextStyle(fontSize: 13.0, color: Colors.black54),
+      this.selectedOptionsTextStyle = const TextStyle(fontSize: 13.0, color: Colors.black54),
+      this.selectedOptionsColorStyle,
       this.hintText = 'Tap to select one or more',
+      this.hintStyle = const TextStyle(color: Colors.grey),
       this.required = false,
       this.errorText = 'Please select one or more options',
       this.leading,
@@ -40,6 +50,8 @@ class MultiSelectFormField extends FormField<dynamic> {
       this.okButtonLabel = 'OK',
       this.cancelButtonLabel = 'CANCEL',
       this.fillColor,
+      this.icon,
+      this.backgroundColor,
       this.border,
       this.trailing})
       : super(
@@ -55,8 +67,11 @@ class MultiSelectFormField extends FormField<dynamic> {
                 state.value.forEach((item) {
                   var existingItem = dataSource.singleWhere((itm) => itm[valueField] == item, orElse: () => null);
                   selectedOptions.add(Chip(
-                    label: Text(existingItem[textField], overflow: TextOverflow.ellipsis),
-                  ));
+                    label: Text(existingItem[textField], overflow: TextOverflow.ellipsis,
+                    style: selectedOptionsTextStyle,
+                    ),
+                  backgroundColor: selectedOptionsColorStyle,)
+                  );
                 });
               }
 
@@ -96,10 +111,14 @@ class MultiSelectFormField extends FormField<dynamic> {
               child: InputDecorator(
                 decoration: InputDecoration(
                   filled: true,
+                  fillColor: backgroundColor,
+                  labelStyle: TextStyle(color: backgroundColor, fontSize: 10.0),
+                  errorStyle: TextStyle(color: Colors.red[600], fontSize: 12.0),
+                  enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white)),
+                  prefixIcon: icon,
                   errorText: state.hasError ? state.errorText : null,
                   errorMaxLines: 4,
-                  fillColor: fillColor ?? Theme.of(state.context).canvasColor,
-                  border: border ?? UnderlineInputBorder(),
                 ),
                 isEmpty: state.value == null || state.value == '',
                 child: Column(
@@ -113,7 +132,7 @@ class MultiSelectFormField extends FormField<dynamic> {
                           Expanded(
                               child: Text(
                             titleText,
-                            style: TextStyle(fontSize: 13.0, color: Colors.black54),
+                            style: titleStyle,
                           )),
                           required
                               ? Padding(padding:EdgeInsets.only(top:5, right: 5), child: Text(
@@ -143,10 +162,7 @@ class MultiSelectFormField extends FormField<dynamic> {
                             padding: EdgeInsets.only(top: 4),
                             child: Text(
                               hintText,
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.grey.shade500,
-                              ),
+                              style: hintStyle,
                             ),
                           )
                   ],

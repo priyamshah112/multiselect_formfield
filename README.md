@@ -6,7 +6,7 @@ A multi select form field using alert dialog to select multiple items with check
 
 ## Demo
 
-<img src="https://github.com/cetorres/multiselect_formfield/raw/master/screenshot.gif" width="300" />
+<img src="https://github.com/priyamshah112/multiselect_formfield/blob/master/screenshot.gif" width="300" />
 
 ## Features
 
@@ -17,6 +17,12 @@ A multi select form field using alert dialog to select multiple items with check
 - Provides requirement of the field.
 - Customizable texts.
 - Follows the app theme and colors.
+- titleStyle field as TextStyle for title.
+- selectedOptionTextStyle as TextStyle for selectedOption Styling.
+- selectedOptionColorStyle as Color for selectedOption background Color.
+- hintTextStyle as TextStyle for hintText Styling.
+- backgroundColor as Color for background color of dropdown.
+- icon as Icon for dropdown icon.
 
 ## Example
 
